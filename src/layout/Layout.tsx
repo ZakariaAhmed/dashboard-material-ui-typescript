@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import PropTypes from "prop-types";
 import createStyles from "@material-ui/core/styles/createStyles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import withRoot from "../withRoot";
@@ -18,6 +17,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "../RoutesConfig/listItems";
+import resolution from "../images/resolution-logo.png";
 
 const drawerWidth = 240;
 
@@ -59,7 +59,8 @@ const styles = (theme: Theme) =>
       display: "none"
     },
     title: {
-      flexGrow: 1
+      flexGrow: 1,
+      color: "white"
     },
     drawerPaper: {
       position: "relative",
@@ -117,6 +118,10 @@ const Layout: React.FC<WithStyles<typeof styles>> = props => {
         className={classNames(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar disableGutters={!open} className={classes.toolbar}>
+          &nbsp;
+          <a href="/">
+            <img src={resolution} height={40} width={100} />
+          </a>{" "}
           <IconButton
             color="inherit"
             aria-label="Open drawer"
@@ -134,9 +139,7 @@ const Layout: React.FC<WithStyles<typeof styles>> = props => {
             color="inherit"
             noWrap
             className={classes.title}
-          >
-            Dashboard
-          </Typography>
+          />
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />

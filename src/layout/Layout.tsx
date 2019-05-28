@@ -53,7 +53,8 @@ const styles = (theme: Theme) =>
     },
     menuButton: {
       marginLeft: 12,
-      marginRight: 36
+      marginRight: 36,
+      color: "white"
     },
     menuButtonHidden: {
       display: "none"
@@ -95,6 +96,11 @@ const styles = (theme: Theme) =>
     tableContainer: {
       height: 320
     },
+    drawerList: {
+      width: "100%",
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper
+    },
     h5: {
       marginBottom: theme.spacing.unit * 2
     }
@@ -120,7 +126,7 @@ const Layout: React.FC<WithStyles<typeof styles>> = props => {
         <Toolbar disableGutters={!open} className={classes.toolbar}>
           &nbsp;
           <a href="/">
-            <img src={resolution} height={40} width={100} />
+            <img alt="logo" src={resolution} height={30} width={100} />
           </a>{" "}
           <IconButton
             color="inherit"
@@ -140,11 +146,13 @@ const Layout: React.FC<WithStyles<typeof styles>> = props => {
             noWrap
             className={classes.title}
           />
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <div className={classes.menuButton}>
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -163,25 +171,24 @@ const Layout: React.FC<WithStyles<typeof styles>> = props => {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
+        <List className={classes.drawerList}>{mainListItems}</List>
+        {/* <Divider />
+        <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Typography variant="h4" gutterBottom component="h2">
-          Orders
-        </Typography>
-        <Typography component="div" className={classes.chartContainer}>
-          {/* <SimpleLineChart /> */}
-        </Typography>
-        <Typography variant="h4" gutterBottom component="h2">
-          Products
-        </Typography>
-        <div className={classes.tableContainer}>{/* <SimpleTable /> */}</div>
+        {props.children}
       </main>
     </div>
   );
 };
 
 export default withRoot(withStyles(styles)(Layout));
+
+/*
+
+ <Typography variant="h4" gutterBottom component="h2">
+          Orders
+        </Typography>
+
+*/
